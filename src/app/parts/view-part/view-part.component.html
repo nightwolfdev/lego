@@ -1,0 +1,37 @@
+<div class="container">
+  <ng-container *ngIf="part$ | async as part; else: loadingPart">
+    <div class="card mb-4">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img [src]="part.part_img_url" class="img-fluid rounded-start" [alt]="part.name">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h1 class="card-title">{{ part.name }}</h1>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <strong>Part Number:</strong> {{ part.part_num }}
+              </li>
+              <li class="list-group-item">
+                <strong>Category:</strong> {{ part.category_name }}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #loadingPart>
+    <app-loading message="Loading part..."></app-loading>
+  </ng-template>
+
+  <ng-container *ngIf="partColors$ | async as partColors; else: loadingColors">
+    <ng-container *ngIf="partColors.length > 0">
+      <h2 class="mb-4">Colors</h2>
+      <app-search-item [searchResults]="partColors"></app-search-item>
+    </ng-container>
+  </ng-container>
+  <ng-template #loadingColors>
+    <app-loading message="Loading colors..."></app-loading>
+  </ng-template>
+</div>

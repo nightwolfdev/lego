@@ -1,0 +1,66 @@
+<div class="container">
+  <form [formGroup]="form" (ngSubmit)="search()" class="mb-4">
+    <div class="row row-cols-1 row-cols-md-6 g-4 align-items-end">
+      <div class="col">
+        <label for="search_type" class="form-label">Type</label>
+        <select id="search_type" class="form-select" formControlName="search_type">
+          <option *ngFor="let searchType of searchTypes" [value]="searchType.id">{{ searchType.name }}</option>
+        </select>
+      </div>
+      <div class="col">
+        <label for="search" class="form-label">Term</label>
+        <input type="text" class="form-control" id="search" formControlName="search">
+      </div>
+      <div *ngIf="form.get('search_type').value === 'parts'" class="col">
+        <label for="part_cat_id" class="form-label">Category</label>
+        <select id="part_cat_id" class="form-select" formControlName="part_cat_id">
+          <ng-container *ngIf="categories$ | async as categories; else: loadingCategories">
+            <option value="" selected>Any Category</option>
+            <option *ngFor="let category of categories" [value]="category.id">{{ category.name }} </option>
+          </ng-container>
+          <ng-template #loadingCategories>
+            <option value="" selected>Loading...</option>
+          </ng-template>
+        </select>
+      </div>       
+      <div *ngIf="form.get('search_type').value !== 'parts'" class="col">
+        <label for="theme_id" class="form-label">Theme</label>
+        <select id="theme_id" class="form-select" formControlName="theme_id">
+          <ng-container *ngIf="themes$ | async as themes; else: loadingThemes">
+            <option value="">Any Theme</option>
+            <option *ngFor="let theme of themes" [value]="theme.id">{{ theme.name }}</option>
+          </ng-container>
+          <ng-template #loadingThemes>
+            <option value="" selected>Loading...</option>
+          </ng-template>
+        </select>
+      </div>
+      <div *ngIf="form.get('search_type').value === 'sets'" class="col">
+        <label for="min_year" class="form-label">Year</label>
+        <select id="min_year" class="form-select" formControlName="min_year">
+          <option value="" selected>Any Year</option>
+          <option *ngFor="let year of years" [value]="year">{{ year }} </option>
+        </select>
+      </div>      
+      <div class="col">
+        <button type="submit" class="btn btn-primary">Search</button>
+      </div>
+    </div>
+  </form>
+
+  <ng-container *ngIf="searching">
+    <app-loading message="Searching..."></app-loading>
+  </ng-container>
+
+  <ng-container *ngIf="searchResults$ | async as searchResults">
+    <h6 class="text-center mb-4">Total Found: {{ searchResults.count }}</h6>
+    <app-search-item [searchResults]="searchResults.results"></app-search-item>
+
+    <div *ngIf="searchResults.previous || searchResults.next" class="d-flex justify-content-center mb-4">
+      <div class="btn-group" role="group" aria-label="Page Navigation">
+        <button type="button" class="btn btn-primary" (click)="prevNext(searchResults.previous)" [disabled]="!searchResults.previous">Previous</button>
+        <button type="button" class="btn btn-primary" (click)="prevNext(searchResults.next)" [disabled]="!searchResults.next">Next</button>
+      </div>
+    </div>
+  </ng-container>
+</div>

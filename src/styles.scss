@@ -1,1 +1,60 @@
-/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+
+$black: rgb(0, 0, 0);
+$orange: rgb(253, 128, 36);
+$white: rgb(255, 255, 255);
+$yellow: rgb(255, 207, 0);
+
+#header {
+  background-color: $yellow;
+
+  a {
+    color: $black;
+  }
+}
+
+.btn-primary {
+  background-color: $orange;
+  border-color: $orange;
+
+  &:disabled {
+    background-color: $white;
+    border-color: $orange;
+    color: $black;
+  }
+
+  &:focus, &:hover {
+    background-color: $white;
+    border-color: $orange;
+    color: $orange;
+  }
+}
+
+.search-item {
+  overflow: hidden;
+
+  &:hover {
+    border-color: $black;
+  }
+
+  &:hover img {
+    transform: scale(1.15);
+  }
+
+  .search-item-image-container {
+    overflow: hidden;
+    max-height: 400px;
+
+    img {
+      transition: transform .5s ease;
+    }
+  }
+}
+
+a {
+  color: $black;
+
+  &:hover {
+    color: $black;
+  }
+}

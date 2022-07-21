@@ -1,0 +1,63 @@
+<div class="container">
+  <ng-container *ngIf="set$ | async as set; else: loadingSet">
+    <div class="card mb-4">
+      <div class="row g-2">
+        <div class="col-md-4">
+          <img [src]="set.set_img_url" class="img-fluid rounded-start" [alt]="set.name">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h1 class="card-title">{{ set.name }}</h1>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <strong>Set Number:</strong> {{ set.set_num }}
+              </li>
+              <li class="list-group-item">
+                <strong>Theme:</strong> {{ set.theme_name }}
+              </li>
+              <li class="list-group-item">
+                <strong>Year:</strong> {{ set.year }}
+              </li>
+              <li class="list-group-item">
+                <strong>Number of Parts:</strong> {{ set.num_parts }}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #loadingSet>
+    <app-loading message="Loading set..."></app-loading>
+  </ng-template>
+
+  <ng-container *ngIf="setAlternates$ | async as setAlternates; else: loadingAlternates">
+    <ng-container *ngIf="setAlternates.length > 0">
+      <h2 class="mb-4">Alternate Builds</h2>
+      <app-search-item [searchResults]="setAlternates"></app-search-item>
+    </ng-container>
+  </ng-container>
+  <ng-template #loadingAlternates>
+    <app-loading message="Loading alternate builds..."></app-loading>
+  </ng-template>
+
+  <ng-container *ngIf="setMinifigs$ | async as setMinifigs; else: loadingMinifigs">
+    <ng-container *ngIf="setMinifigs.length > 0">
+      <h2 class="mb-4">Minifigs</h2>
+      <app-search-item [searchResults]="setMinifigs"></app-search-item>
+    </ng-container>
+  </ng-container>
+  <ng-template #loadingMinifigs>
+    <app-loading message="Loading minifigs..."></app-loading>
+  </ng-template>
+
+  <ng-container *ngIf="setParts$ | async as setParts; else: loadingParts">
+    <ng-container *ngIf="setParts.length > 0">
+      <h2 class="mb-4">Part List</h2>
+      <app-search-item [searchResults]="setParts"></app-search-item>
+    </ng-container>
+  </ng-container>
+  <ng-template #loadingParts>
+    <app-loading message="Loading parts..."></app-loading>
+  </ng-template>
+</div>

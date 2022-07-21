@@ -1,0 +1,40 @@
+<div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4 mb-4">
+  <div *ngFor="let searchResult of searchResults" class="col">
+    <div class="card h-100 search-item">
+      <ng-container *ngIf="searchResult.moc_url; else: routerImgUrl">
+        <a target="_blank" [href]="searchResult.moc_url">
+          <div class="search-item-image-container">
+            <img [src]="searchResult.imgUrl" class="card-img-top" [alt]="searchResult.name">
+          </div>
+        </a>
+      </ng-container>
+      <ng-template #routerImgUrl>
+        <a [routerLink]="searchResult.routerUrl">
+          <div class="search-item-image-container">
+            <img [src]="searchResult.imgUrl" class="card-img-top" [alt]="searchResult.name">
+          </div>
+        </a>
+      </ng-template>
+      <div class="card-body">
+        <ng-container *ngIf="searchResult.moc_url; else: routerHeadingUrl">
+          <a target="_blank" [href]="searchResult.moc_url">
+            <h5 class="card-title">{{ searchResult.name }}</h5>
+          </a>
+        </ng-container>
+        <ng-template #routerHeadingUrl>
+          <a [routerLink]="searchResult.routerUrl">
+            <h5 class="card-title">{{ searchResult.name }}</h5>
+          </a>
+        </ng-template>
+      </div>
+      <ul *ngIf="searchResult.designer_name || searchResult.quantity" class="list-group list-group-flush">
+        <li *ngIf="searchResult.designer_name" class="list-group-item">
+          <strong>Designer:</strong>&nbsp;<a target="_blank" [href]="searchResult.designer_url">{{ searchResult.designer_name }}</a>
+        </li>
+        <li *ngIf="searchResult.quantity" class="list-group-item">
+          <strong>Quantity:</strong> {{ searchResult.quantity }}
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

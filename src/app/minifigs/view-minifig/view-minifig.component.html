@@ -1,0 +1,47 @@
+<div class="container">
+  <ng-container *ngIf="minifig$ | async as minifig; else: loadingMinifig">
+    <div class="card mb-4">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img [src]="minifig.set_img_url" class="img-fluid rounded-start" [alt]="minifig.name">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h1 class="card-title">{{ minifig.name }}</h1>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <strong>Set Number:</strong> {{ minifig.set_num }}
+              </li>
+              <li class="list-group-item">
+                <strong>Number of Parts:</strong> {{ minifig.num_parts }}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #loadingMinifig>
+    <app-loading message="Loading minifig..."></app-loading>
+  </ng-template>
+
+  <ng-container *ngIf="minifigParts$ | async as minifigParts; else: loadingParts">
+    <ng-container *ngIf="minifigParts.length > 0">
+      <h2 class="mb-4">Part List</h2>
+      <app-search-item [searchResults]="minifigParts"></app-search-item>
+    </ng-container>
+  </ng-container>
+  <ng-template #loadingParts>
+    <app-loading message="Loading part list..."></app-loading>
+  </ng-template>
+
+  <ng-container *ngIf="minifigSets$ | async as minifigSets; else: loadingSets">
+    <ng-container *ngIf="minifigSets.length > 0">
+      <h2 class="mb-4">Sets</h2>
+      <app-search-item [searchResults]="minifigSets"></app-search-item>
+    </ng-container>
+  </ng-container>
+  <ng-template #loadingSets>
+    <app-loading message="Loading sets..."></app-loading>
+  </ng-template>
+</div>
