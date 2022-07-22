@@ -110,11 +110,11 @@ export interface SearchCriteria {
 }
 
 export interface SearchForm {
-  min_year?: FormControl<string | null>;
   part_cat_id?: FormControl<string | null>,
   search?: FormControl<string | null>;
   search_type: FormControl<string>;
   theme_id?: FormControl<string | null>;
+  year?: FormControl<string | null>;
 }
 
 export interface SearchResponse extends SearchResponsePartial {

@@ -36,8 +36,8 @@
         </select>
       </div>
       <div *ngIf="form.get('search_type').value === 'sets'" class="col">
-        <label for="min_year" class="form-label">Year</label>
-        <select id="min_year" class="form-select" formControlName="min_year">
+        <label for="year" class="form-label">Year</label>
+        <select id="year" class="form-select" formControlName="year">
           <option value="" selected>Any Year</option>
           <option *ngFor="let year of years" [value]="year">{{ year }} </option>
         </select>

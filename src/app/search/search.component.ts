@@ -45,11 +45,11 @@ export class SearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = new FormGroup<SearchForm>({
-      min_year: new FormControl(''),
       part_cat_id: new FormControl(''),
       search: new FormControl(''),
       search_type: new FormControl('sets'),
-      theme_id: new FormControl('')
+      theme_id: new FormControl(''),
+      year: new FormControl(''),
     });
 
     this.searchResults$ = this.searchSvc.searchResults$.pipe(
@@ -62,7 +62,7 @@ export class SearchComponent implements OnInit {
 
     if (this.searchSvc.getCurrentSearchCriteria()) {
       this.form.patchValue({
-        min_year: this.searchSvc.getCurrentSearchCriteria()?.min_year?.toString() || '',
+        year: this.searchSvc.getCurrentSearchCriteria()?.min_year?.toString() || '',
         part_cat_id: this.searchSvc.getCurrentSearchCriteria()?.part_cat_id?.toString(),
         search: this.searchSvc.getCurrentSearchCriteria()?.search,
         search_type: this.searchSvc.getCurrentSearchCriteria()?.search_type,
@@ -86,14 +86,15 @@ export class SearchComponent implements OnInit {
   }
 
   search(): void {
-    const minYear = this.form.get('min_year').value;
+    const year = this.form.get('year').value;
     const partCatId = this.form.get('part_cat_id').value;
     const search = this.form.get('search').value;
     const searchType = this.form.get('search_type').value;
     const themeId = this.form.get('theme_id').value;
 
     const searchCriteria: SearchCriteria = {
-      min_year: minYear ? +minYear : null,
+      max_year: year ? +year : null,
+      min_year: year ? +year : null,
       ordering: 'name',
       page: 1,
       page_size: 100,
