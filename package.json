@@ -1,5 +1,12 @@
 {
   "name": "lego",
+  "description": "LEGO Search app using Angular, RxJS, Typescript and Rebrickable API.",
+  "keywords": ["api", "angular", "typescript", "rxjs"],
+  "homepage": "https://github.com/nightwolfdev/lego",
+  "author": {
+    "name": "NightWolf Software Development",
+    "url": "https://nightwolf.dev"
+  },
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
