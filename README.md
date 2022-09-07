@@ -1,5 +1,7 @@
 # LEGO Search
 
+![LEGO Search App](./src/assets/img/lego-search-app.png)
+
 LEGO Search app using Angular, RxJS, TypeScript, and Rebrickable API.
 
 ## Getting Started
