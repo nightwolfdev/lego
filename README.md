@@ -18,7 +18,7 @@ LEGO Search app using Angular, RxJS, TypeScript, and Rebrickable API.
   `http://localhost:4200`
 
 ## API Key
-In order to make a valid API requet, an API key is required. [Learn more](https://rebrickable.com/api/)
+In order to make a valid API request, an API key is required. [Learn more](https://rebrickable.com/api/)
 
 ## Links
 
