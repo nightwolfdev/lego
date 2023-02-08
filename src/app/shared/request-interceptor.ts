@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class RequestInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const isApiRequest = request.url.includes(host);
+    const isApiRequest = request.url.startsWith(host);
     
     if (isApiRequest) {
       request = request.clone({
